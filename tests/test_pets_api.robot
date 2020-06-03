@@ -13,11 +13,12 @@ ${PET_NAME_UPDATED}    new_name
 *** Test Cases ***
 Test pets endpointes
     ${pets_id} =  create pets via api  ${PET_NAME}
-    update pets name    ${pets_id}  ${PET_NAME_UPDATED}  ${PET_STATUS}
-    update pets name with invalid data in json  45645645111111111145564565   Homies  500
-    update pets name with invalid data in json  abs   Homies  500
-    find pets    ${pets_id}  ${PET_NAME_UPDATED}  ${PET_STATUS}
-    delete pets  ${pets_id}
+#    update pets name    ${pets_id}  ${PET_NAME_UPDATED}  ${PET_STATUS}
+#    update pets name with invalid data in json  45645645111111111145564565   Homies  500
+#    update pets name with invalid data in json  abs   Homies  500
+#    find pets    ${pets_id}  ${PET_NAME_UPDATED}  ${PET_STATUS}
+    upload photo      ${pets_id}    /home/sadovsky/Downloads/dog.jpeg
+#    delete pets  ${pets_id}
 
 
 
@@ -44,9 +45,14 @@ find pets
     find_pets_by_id  ${pets_id}     ${name}
     find pets by invalid id  123435757375    404
 
+upload photo
+    [Arguments]  ${pets_id}  ${photo_path}
+    upload pet photo  ${pets_id}  ${photo_path}
+
 delete pets
     [Arguments]  ${pets_id}
     delete pets by id  ${pets_id}
+
 
 
 

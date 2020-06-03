@@ -1,3 +1,5 @@
+import os
+import requests
 from helpers.ApiHelper import ApiHelper
 from helpers.JsonHelper import JsonHelper
 
@@ -52,3 +54,11 @@ class PetsLibrary:
         new_url = self.url + f"/{id}"
         ApiHelper().send_request('delete', new_url, status_code=404)
 
+    def upload_pet_photo(self, id, path_img):
+        new_url = self.url + f"/{id}/uploadImage"
+        with open(path_img, 'rb') as img:
+            name_img = os.path.basename(path_img)
+            files = {'file': (name_img, img)}
+            header = {"Content-Type": "multipart/form-data"}
+            resp = ApiHelper().send_request('post', new_url, files=files, header=header)
+            assert name_img in resp['message']
