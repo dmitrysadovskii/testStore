@@ -1,8 +1,5 @@
-import requests
-import json
 from helpers.ApiHelper import ApiHelper
 from helpers.JsonHelper import JsonHelper
-# from config2.enviroment import pets_data, endpoints
 
 
 class PetsLibrary:
